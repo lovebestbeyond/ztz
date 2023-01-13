@@ -22,7 +22,7 @@ snowflake-uid是基于雪花算法 在分布式环境中主键生成的一种解
 ## 使用说明
 
 ##### 1.ym配置
-     aima-uid:
+     ztz-uid:
      	snowflake:
      		driver-class-name: com.mysql.cj.jdbc.Driver
      		url: jdbc:mysql://127.0.0.1:3306/hao?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true
