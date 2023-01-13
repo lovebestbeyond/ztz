@@ -6,13 +6,20 @@ snowflake-uid是基于雪花算法 在分布式环境中主键生成的一种解
 
 #### 安装教程
 
-1.  拉取代码
-2.  项目进行install或deploy到自己的代码仓库
-3.  pom中引入starter项目，加入yml配置
-4.  执行数据库脚本，生产对应表
-5.  注入SnowflakeService，调用 snowflake.getId()返回一个Long类型的主键值
+1. pom中引入starter（已上传到中央仓库）
+##### 
+            <dependency>
+                <groupId>io.github.ztianz.uid</groupId>
+                <artifactId>snowflake-uid-spring-boot-starter</artifactId>
+                <version>0.0.1</version>
+            </dependency>
 
-#### 使用说明
+
+3. 加入yml配置
+3. 执行数据库脚本，生产对应表
+4. 注入SnowflakeService，调用 snowflake.getId()返回一个Long类型的主键值
+
+## 使用说明
 
 ##### 1.ym配置
      aima-uid:
