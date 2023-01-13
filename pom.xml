@@ -8,6 +8,10 @@
     <artifactId>snowflake-uid</artifactId>
     <packaging>pom</packaging>
     <version>0.0.1</version>
+    <name>${project.artifactId}</name>
+    <description>${project.artifactId}</description>
+    <url>https://github.com/ztianz/snowflake-uid</url>
+
     <modules>
         <module>snowflake-uid-core</module>
         <module>snowflake-uid-spring-boot-starter</module>
