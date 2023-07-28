@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author ztz
  * @date 2023/02/01
  */
-@ConfigurationProperties(prefix = "ztz-uid.snowflake",ignoreUnknownFields = true)
+@ConfigurationProperties(prefix = "ztz-uid.snowflake", ignoreUnknownFields = true)
 public class SnowflakeIdSpringBootProperties {
     private String driverClassName;
     private String url;
@@ -17,6 +17,7 @@ public class SnowflakeIdSpringBootProperties {
     private Long workerIdBits;
     private Long sequenceBits;
     private Long twepoch;
+    private String interfaceName;
     private Boolean heartBeat;
 
     public String getDriverClassName() {
@@ -97,5 +98,13 @@ public class SnowflakeIdSpringBootProperties {
 
     public void setHeartBeat(Boolean heartBeat) {
         this.heartBeat = heartBeat;
+    }
+
+    public String getInterfaceName() {
+        return interfaceName;
+    }
+
+    public void setInterfaceName(String interfaceName) {
+        this.interfaceName = interfaceName;
     }
 }

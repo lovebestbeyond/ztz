@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class SnowflakeIDGenImpl {
 
-    private static final String LOG_TEMPLATE="\r\n雪花算法Info:\r\n主键：{}\r\n应用名称：{}\r\n心跳周期：{}\r\n时间位长度：{}，\r\n机器位长度：{}，\r\n序列位长度：{}，\r\n起始时间：{}~~~~~{}，\r\n可用时间：{}~~~~~{}年，\r\n截止使用时间{}\r\n机器值范围：{}~~~~~当前机器值{}，\r\n每秒产生最大数据：{}个";
+    private static final String LOG_TEMPLATE = "\r\n雪花算法Info:\r\n主键：{}\r\n应用名称：{}\r\n心跳周期：{}\r\n时间位长度：{}，\r\n机器位长度：{}，\r\n序列位长度：{}，\r\n起始时间：{}~~~~~{}，\r\n可用时间：{}~~~~~{}年，\r\n截止使用时间{}\r\n机器值范围：{}~~~~~当前机器值{}，\r\n每秒产生最大数据：{}个";
 
 
     private IdWorkNodeDao dao;
@@ -76,8 +76,11 @@ public class SnowflakeIDGenImpl {
     //log用到
     private Long maxTimestamp;
 
+    //网卡名称
+    private String interfaceName;
 
-    public SnowflakeIDGenImpl(IdWorkNodeDao dao, String applicationName, Integer serverrPort, Long workerIdBits, Long sequenceBits, Long twepoch, Boolean heartBeat) {
+
+    public SnowflakeIDGenImpl(IdWorkNodeDao dao, String applicationName, Integer serverrPort, Long workerIdBits, Long sequenceBits, Long twepoch, String interfaceName, Boolean heartBeat) {
         if (null == dao) {
             throw new SnowErrorException("Snowflake datasource operate error");
         }
@@ -106,6 +109,7 @@ public class SnowflakeIDGenImpl {
             }
             this.twepoch = twepoch;
         }
+        this.interfaceName = interfaceName;
         this.maxWorkerId = ~(-1L << this.workerIdBits);
         this.workerIdShift = this.sequenceBits;
         this.timestampLeftShift = this.sequenceBits + this.workerIdBits;
@@ -126,7 +130,7 @@ public class SnowflakeIDGenImpl {
 //        int cycleMinutes = 30 * 60 + (RANDOM.nextInt(31 * 60));
         int cycleMinutes = 30 * 60;
         IdWorkerNode WorkerNode = IdWorkerNode.builder()
-                .hostName(SystemUtil.getIp())
+                .hostName(SystemUtil.getIp(this.interfaceName))
                 .serverPort(serverrPort)
                 .applicationName(applicationName)
                 .cycleMinutes(cycleMinutes)

@@ -7,7 +7,7 @@
     <groupId>io.github.ztianz.uid</groupId>
     <artifactId>snowflake-uid</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <name>${project.artifactId}</name>
     <description>${project.artifactId}</description>
     <url>https://github.com/ztianz/snowflake-uid</url>

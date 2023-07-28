@@ -23,7 +23,7 @@ public class SnowflakeIdSpringBootStarterAutoConfigure {
     @Bean
     @ConditionalOnMissingBean(SnowflakeService.class)
     public SnowflakeService initSnowflakeService() throws Exception {
-        if (properties != null ) {
+        if (properties != null) {
             SnowflakeService snowflakeService = new SnowflakeService(
                     properties.getDriverClassName(),
                     properties.getUrl(),
@@ -34,6 +34,7 @@ public class SnowflakeIdSpringBootStarterAutoConfigure {
                     properties.getWorkerIdBits(),
                     properties.getSequenceBits(),
                     properties.getTwepoch(),
+                    properties.getInterfaceName(),
                     properties.getHeartBeat());
             return snowflakeService;
         }

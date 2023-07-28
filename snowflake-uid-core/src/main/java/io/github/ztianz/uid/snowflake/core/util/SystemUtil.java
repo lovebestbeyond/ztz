@@ -1,5 +1,6 @@
 package io.github.ztianz.uid.snowflake.core.util;
 
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.Inet6Address;
@@ -29,14 +30,18 @@ public class SystemUtil {
 
     public static String getIp(String interfaceName) {
         String ip;
-        interfaceName = interfaceName.trim();
-        try {
-            List<String> ipList = getHostAddress(interfaceName);
-            ip = (!ipList.isEmpty()) ? ipList.get(0) : "";
-        } catch (Exception ex) {
-            ip = "";
-            log.warn("Utils get IP warn", ex);
-            ex.printStackTrace();
+        if (StrUtil.isNotBlank(interfaceName)) {
+            interfaceName = interfaceName.trim();
+            try {
+                List<String> ipList = getHostAddress(interfaceName);
+                ip = (!ipList.isEmpty()) ? ipList.get(0) : "";
+            } catch (Exception ex) {
+                ip = "";
+                log.warn("Utils get IP warn", ex);
+                ex.printStackTrace();
+            }
+        } else {
+            ip = getIp();
         }
         return ip;
     }

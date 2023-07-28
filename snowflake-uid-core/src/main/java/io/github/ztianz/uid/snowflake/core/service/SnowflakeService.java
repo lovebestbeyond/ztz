@@ -19,38 +19,38 @@ public class SnowflakeService {
 
     private DruidDataSource dataSource;
 
-    public SnowflakeService(String driverClassName, String url, String username, String password, String applicationName, Integer serverrPort, Long workerIdBits, Long sequenceBits, Long twepoch, Boolean heartBeat) throws SQLException, SnowErrorException {
-        if(StrUtil.isBlank(driverClassName)){
+    public SnowflakeService(String driverClassName, String url, String username, String password, String applicationName, Integer serverrPort, Long workerIdBits, Long sequenceBits, Long twepoch, String interfaceName, Boolean heartBeat) throws SQLException, SnowErrorException {
+        if (StrUtil.isBlank(driverClassName)) {
             throw new SnowErrorException("database driverClassName can not be null");
         }
-        if(StrUtil.isBlank(url)){
+        if (StrUtil.isBlank(url)) {
             throw new SnowErrorException("database url can not be null");
         }
-        if(StrUtil.isBlank(username)){
+        if (StrUtil.isBlank(username)) {
             throw new SnowErrorException("database username can not be null");
         }
-        if(StrUtil.isBlank(password)){
+        if (StrUtil.isBlank(password)) {
             throw new SnowErrorException("database password can not be null");
         }
-        if(StrUtil.isBlank(applicationName)){
+        if (StrUtil.isBlank(applicationName)) {
             throw new SnowErrorException("applicationName can not be null");
         }
-        if(null ==serverrPort){
+        if (null == serverrPort) {
             throw new SnowErrorException("serverrPort can not be null");
         }
-        if(null == heartBeat){
+        if (null == heartBeat) {
             heartBeat = false;
         }
-        if ((null == workerIdBits && null != sequenceBits) || (null != workerIdBits && null == sequenceBits)){
+        if ((null == workerIdBits && null != sequenceBits) || (null != workerIdBits && null == sequenceBits)) {
             throw new SnowErrorException("workerIdBits and sequenceBits can't not Config");
         }
-        if (null == twepoch){
+        if (null == twepoch) {
             twepoch = 1672502400000L;
         }
-        if (null == workerIdBits){
+        if (null == workerIdBits) {
             workerIdBits = 16L;
         }
-        if (null == sequenceBits){
+        if (null == sequenceBits) {
             sequenceBits = 7L;
         }
         // Config dataSource
@@ -64,7 +64,7 @@ public class SnowflakeService {
         // Config Dao
         IdWorkNodeDao dao = new IdWorkNodeDaoImpl(dataSource);
         // Config ID Gen
-        idGen = new SnowflakeIDGenImpl(dao,applicationName,serverrPort,workerIdBits, sequenceBits, twepoch,heartBeat);
+        idGen = new SnowflakeIDGenImpl(dao, applicationName, serverrPort, workerIdBits, sequenceBits, twepoch, interfaceName, heartBeat);
         logger.info("Snowflake Service Init Successfully");
     }
 
